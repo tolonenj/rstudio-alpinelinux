@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
 
-TTYD_ARGS="-p8787 -W -I /var/www/localhost/htdocs/index.html"
+TTYD_ARGS="-W -I /var/www/localhost/htdocs/index.html -p8787"
 
 # Create user account
 adduser -D --shell=/bin/bash $USERNAME
 
 # Add a password to the user
-echo "$USERNAME:$PASSWORD" | chpasswd
+echo "$USERNAME:$PASSWORD" | chpasswd &> /dev/null
 
 # Set timezone
 ln -sf "/usr/share/zoneinfo/$TZ" /etc/localtime
