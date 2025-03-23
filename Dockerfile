@@ -1,15 +1,10 @@
-FROM alpine:3.21.2
-ENV TZ="Europe/Helsinki"
+FROM alpine:3.21.3
 
-COPY --chmod=700 ./entrypoint.sh /init
+COPY --chmod=500 ./install_alpine.sh /install_alpine.sh
+RUN /install_alpine.sh \
+    && rm /install_alpine.sh
 
-COPY ./var/www /var/www
-
-COPY ./usr/share/zoneinfo /usr/share/zoneinfo
-
-COPY --chmod=700 ./install_alpine.sh /tmp/install_alpine.sh
-
-RUN /tmp/install_alpine.sh
+COPY --chmod=500 ./init /init
 
 EXPOSE 8787
 
